@@ -1,27 +1,27 @@
 import asyncio
-from info import info  # Assuming your configuration class is named Info
+import info  # Assuming your configuration class is named info
 import pyrogram
-from pyrogram import Client,filters, enums
-from pyrogram.errors import FloodWait, UserNotParticipant
+from pyrogram import Client, filters
+from pyrogram.errors import FloodWait
 from pyrogram.types import InlineKeyboardMarkup, InlineKeyboardButton, Message
 
 
 async def ForceSub(c: Client, m: Message):
     try:
-        invite_link = await c.create_chat_invite_link(chat_id=(int(Info.UPDATES_CHANNEL) if Info.UPDATES_CHANNEL.startswith("-100") else Info.UPDATES_CHANNEL))
-        invite_link1 = await c.create_chat_invite_link(chat_id=(int(Info.UPDATES_CHANNEL1) if Info.UPDATES_CHANNEL1.startswith("-100") else Info.UPDATES_CHANNEL1))
-        invite_link2 = await c.create_chat_invite_link(chat_id=(int(Info.UPDATES_CHANNEL2) if Info.UPDATES_CHANNEL2.startswith("-100") else Info.UPDATES_CHANNEL2))
-        invite_link3 = await c.create_chat_invite_link(chat_id=(int(Info.UPDATES_CHANNEL3) if Info.UPDATES_CHANNEL3.startswith("-100") else Info.UPDATES_CHANNEL3))
-        invite_link4 = await c.create_chat_invite_link(chat_id=(int(Info.UPDATES_CHANNEL4) if Info.UPDATES_CHANNEL4.startswith("-100") else Info.UPDATES_CHANNEL4))
+        invite_link = await c.create_chat_invite_link(chat_id=(int(info.UPDATES_CHANNEL) if info.UPDATES_CHANNEL.startswith("-100") else info.UPDATES_CHANNEL))
+        invite_link1 = await c.create_chat_invite_link(chat_id=(int(info.UPDATES_CHANNEL1) if info.UPDATES_CHANNEL1.startswith("-100") else info.UPDATES_CHANNEL1))
+        invite_link2 = await c.create_chat_invite_link(chat_id=(int(info.UPDATES_CHANNEL2) if info.UPDATES_CHANNEL2.startswith("-100") else info.UPDATES_CHANNEL2))
+        invite_link3 = await c.create_chat_invite_link(chat_id=(int(info.UPDATES_CHANNEL3) if info.UPDATES_CHANNEL3.startswith("-100") else info.UPDATES_CHANNEL3))
+        invite_link4 = await c.create_chat_invite_link(chat_id=(int(info.UPDATES_CHANNEL4) if info.UPDATES_CHANNEL4.startswith("-100") else info.UPDATES_CHANNEL4))
     except FloodWait as e:
         await asyncio.sleep(e.x)
-        invite_link = await c.create_chat_invite_link(chat_id=(int(Info.UPDATES_CHANNEL) if Info.UPDATES_CHANNEL.startswith("-100") else Info.UPDATES_CHANNEL))
-        invite_link1 = await c.create_chat_invite_link(chat_id=(int(Info.UPDATES_CHANNEL1) if Info.UPDATES_CHANNEL1.startswith("-100") else Info.UPDATES_CHANNEL1))
-        invite_link2 = await c.create_chat_invite_link(chat_id=(int(Info.UPDATES_CHANNEL2) if Info.UPDATES_CHANNEL2.startswith("-100") else Info.UPDATES_CHANNEL2))
-        invite_link3 = await c.create_chat_invite_link(chat_id=(int(Info.UPDATES_CHANNEL3) if Info.UPDATES_CHANNEL3.startswith("-100") else Info.UPDATES_CHANNEL3))
-        invite_link4 = await c.create_chat_invite_link(chat_id=(int(Info.UPDATES_CHANNEL4) if Info.UPDATES_CHANNEL4.startswith("-100") else Info.UPDATES_CHANNEL4))
+        invite_link = await c.create_chat_invite_link(chat_id=(int(info.UPDATES_CHANNEL) if info.UPDATES_CHANNEL.startswith("-100") else info.UPDATES_CHANNEL))
+        invite_link1 = await c.create_chat_invite_link(chat_id=(int(info.UPDATES_CHANNEL1) if info.UPDATES_CHANNEL1.startswith("-100") else info.UPDATES_CHANNEL1))
+        invite_link2 = await c.create_chat_invite_link(chat_id=(int(info.UPDATES_CHANNEL2) if info.UPDATES_CHANNEL2.startswith("-100") else info.UPDATES_CHANNEL2))
+        invite_link3 = await c.create_chat_invite_link(chat_id=(int(info.UPDATES_CHANNEL3) if info.UPDATES_CHANNEL3.startswith("-100") else info.UPDATES_CHANNEL3))
+        invite_link4 = await c.create_chat_invite_link(chat_id=(int(info.UPDATES_CHANNEL4) if info.UPDATES_CHANNEL4.startswith("-100") else info.UPDATES_CHANNEL4))
     except Exception as err:
-        print(f"Unable to create invite links for channels: {Info.UPDATES_CHANNEL}, {Info.UPDATES_CHANNEL1}, {Info.UPDATES_CHANNEL2}, {Info.UPDATES_CHANNEL3}, {Info.UPDATES_CHANNEL4}\n\nError: {err}")
+        print(f"Unable to create invite links for channels: {info.UPDATES_CHANNEL}, {info.UPDATES_CHANNEL1}, {info.UPDATES_CHANNEL2}, {info.UPDATES_CHANNEL3}, {info.UPDATES_CHANNEL4}\n\nError: {err}")
         await c.send_message(
             chat_id=m.from_user.id,
             text="Something went wrong. Contact my admin.",
@@ -31,7 +31,7 @@ async def ForceSub(c: Client, m: Message):
         return 400
     
     try:
-        user = await c.get_chat_member(chat_id=(int(Info.UPDATES_CHANNEL) if Info.UPDATES_CHANNEL.startswith("-100") else Info.UPDATES_CHANNEL), user_id=m.from_user.id)
+        user = await c.get_chat_member(chat_id=(int(info.UPDATES_CHANNEL) if info.UPDATES_CHANNEL.startswith("-100") else info.UPDATES_CHANNEL), user_id=m.from_user.id)
         if user.status == "kicked":
             await c.send_message(
                 chat_id=m.from_user.id,
@@ -44,7 +44,7 @@ async def ForceSub(c: Client, m: Message):
         print(f"Error checking user status for Updates Channel: {e}")
         
     try:
-        user = await c.get_chat_member(chat_id=(int(Info.UPDATES_CHANNEL1) if Info.UPDATES_CHANNEL1.startswith("-100") else Info.UPDATES_CHANNEL1), user_id=m.from_user.id)
+        user = await c.get_chat_member(chat_id=(int(info.UPDATES_CHANNEL1) if info.UPDATES_CHANNEL1.startswith("-100") else info.UPDATES_CHANNEL1), user_id=m.from_user.id)
         if user.status == "kicked":
             await c.send_message(
                 chat_id=m.from_user.id,
